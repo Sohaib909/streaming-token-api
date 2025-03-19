@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");  // Import CORS
 const jwt = require("jsonwebtoken");
 const morgan = require("morgan");
 const fs = require("fs");
@@ -6,7 +7,18 @@ const path = require("path");
 require("dotenv").config();
 
 const app = express();
-app.use(express.json());
+
+// Enable CORS for all routes
+app.use(cors());
+
+// Apply express.json() only for POST and PUT requests
+app.use((req, res, next) => {
+    if (req.method === "POST" || req.method === "PUT") {
+        express.json()(req, res, next);
+    } else {
+        next();
+    }
+});
 
 // Setup log directory
 const logDirectory = path.join(__dirname, "logs");
@@ -15,7 +27,10 @@ if (!fs.existsSync(logDirectory)) {
 }
 
 // Create a write stream (append mode)
-const accessLogStream = fs.createWriteStream(path.join(logDirectory, `${new Date().toISOString().split("T")[0]}.log`), { flags: "a" });
+const accessLogStream = fs.createWriteStream(
+    path.join(logDirectory, `${new Date().toISOString().split("T")[0]}.log`), 
+    { flags: "a" }
+);
 
 // Use morgan for logging
 app.use(morgan("combined", { stream: accessLogStream }));
