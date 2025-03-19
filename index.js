@@ -61,9 +61,16 @@ app.get("/generate-token/:userID", (req, res) => {
         return res.status(400).json({ error: "User ID is required" });
     }
 
-    const payload = { app_id: APP_ID, user_id: userID, };
-    try {
-        const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
+    const payload = {
+        app_id: appID,
+        user_id: userID,
+        nonce: Math.floor(Math.random() * 100000),
+        timestamp: Math.floor(Date.now() / 1000),
+        exp: expireTime
+      };
+      const token = jwt.sign(payload, serverSecret, { algorithm: "HS256" });    
+      try {
+        // const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
 
         // Log the response
         fs.appendFileSync(path.join(logDirectory, `${new Date().toISOString().split("T")[0]}.log`), 
