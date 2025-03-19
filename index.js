@@ -1,27 +1,51 @@
+
 const express = require("express");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const app = express();
-app.use(express.json());  
+app.use(express.json());
 
-const SECRET_KEY = process.env.JWT_SECRET || "your_secret_key"; 
+// Load environment variables
+const SECRET_KEY = process.env.SECRET_KEY 
+const APP_ID = process.env.APP_ID 
+const APP_SIGN = process.env.APP_SIGN 
+
+
+
+if (!SECRET_KEY || !APP_ID || !APP_SIGN) {
+    console.error("Missing required environment variables. Please set JWT_SECRET, APP_ID, and APP_SIGN.");
+    process.exit(1); 
+}
 
  app.get("/", (req, res) => {
+    console.log("Checking: API is running...");
     res.send("Streaming Token API is running...");
 });
 
 app.post("/generate-token", (req, res) => {
-    const { sessionId, userId } = req.body;
+    console.log("Incoming request to /generate-token");
 
-    if (!sessionId || !userId) {
-        return res.status(400).json({ error: "Session ID and User ID are required" });
+    const { userID } = req.body;
+
+    if (!userID) {
+        console.error("Missing userID in request body");
+        return res.status(400).json({ error: "User ID is required" });
     }
 
-    const payload = { sessionId, userId, timestamp: Date.now() };
-    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
+     const payload = {
+        app_id: APP_ID,
+        user_id: userID,
+        app_sign: APP_SIGN, 
+    };
 
-    return res.json({ token });
+    try {
+        const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
+        return res.json({ token });
+    } catch (error) {
+        console.error("Error generating token:", error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
 });
 
 const PORT = process.env.PORT || 3000;
