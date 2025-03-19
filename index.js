@@ -37,7 +37,7 @@ app.get("/", (req, res) => {
 });
 
 // API to generate token
-app.post("/generate-token/:userID", (req, res) => {
+app.get("/generate-token/:userID", (req, res) => {
     console.log("Incoming request to /generate-token");
 
     const { userID } = req.params;
