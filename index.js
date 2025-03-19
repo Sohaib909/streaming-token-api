@@ -38,9 +38,9 @@ app.use(morgan("combined", { stream: accessLogStream }));
 // Load environment variables
 const SECRET_KEY = process.env.SECRET_KEY;
 const APP_ID = process.env.APP_ID;
-const APP_SIGN = process.env.APP_SIGN;
+// const APP_SIGN = process.env.APP_SIGN;
 
-if (!SECRET_KEY || !APP_ID || !APP_SIGN) {
+if (!SECRET_KEY || !APP_ID ) {
     console.error("Missing required environment variables.");
     process.exit(1);
 }
@@ -61,7 +61,7 @@ app.get("/generate-token/:userID", (req, res) => {
         return res.status(400).json({ error: "User ID is required" });
     }
 
-    const payload = { app_id: APP_ID, user_id: userID, app_sign: APP_SIGN };
+    const payload = { app_id: APP_ID, user_id: userID, };
     try {
         const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
 
