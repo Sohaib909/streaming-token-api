@@ -4,3 +4,7 @@ Generated token for user testuser11: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcH
 ::1 - - [20/Mar/2025:16:20:44 +0000] "GET /generate-token/testuser11 HTTP/1.1" 200 200 "-" "PostmanRuntime/7.43.2"
 Generated token for user testuser12: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBfaWQiOiIxNzQyNjQwOTg0IiwidXNlcl9pZCI6InRlc3R1c2VyMTIiLCJhcHBfc2lnbiI6ImE1MGQ4YmU2MjgxOGMzYjJiODQ3NGJlNTBkYjBhYWM1MzRmMDdjZTBkMzQ2ZDlkYmQ0MjE5MmQ4YjkwOWI0MjgiLCJleHAiOjE3NDI0OTE1MTksImlhdCI6MTc0MjQ4NzkxOX0.1n1yI7ffqBCR4KHPBfFXjo2i80XPmbLtH8IgTvH_D3M
 ::1 - - [20/Mar/2025:16:25:19 +0000] "GET /generate-token/testuser12 HTTP/1.1" 200 304 "-" "PostmanRuntime/7.43.2"
+Generated token for user testuser12: {"app_id":1742640984,"user_id":"testuser12","nonce":3913,"expired_ts":1742492507,"token":"f549fdbec4c19f3f026704cb5a81db60debdf79d5f7ba24e73215b011f9e707d"}
+::1 - - [20/Mar/2025:16:41:47 +0000] "GET /generate-token/testuser12 HTTP/1.1" 200 156 "-" "PostmanRuntime/7.43.2"
+Generated token for user testuser123: {"app_id":1742640984,"user_id":"testuser123","nonce":712333,"expired_ts":1742492518,"token":"4b64a1229dcd3f410546651e9b5930301cd98a2fd2f7c683b3080f10b9de37f6"}
+::1 - - [20/Mar/2025:16:41:58 +0000] "GET /generate-token/testuser123 HTTP/1.1" 200 159 "-" "PostmanRuntime/7.43.2"

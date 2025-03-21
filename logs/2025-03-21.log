@@ -1,0 +1,2 @@
+Generated token for user testuser12344: {"app_id":1742640984,"user_id":"testuser12344","nonce":230581,"expired_ts":1742577042,"token":"9d4063b18e218dc6f993ed002d630f42baa7e3309764e03eb0ae0fa788157010"}
+::1 - - [21/Mar/2025:16:10:42 +0000] "GET /generate-token/testuser12344 HTTP/1.1" 200 161 "-" "PostmanRuntime/7.43.2"
