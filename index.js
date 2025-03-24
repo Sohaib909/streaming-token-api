@@ -25,8 +25,8 @@ app.use(morgan("combined", { stream: accessLogStream }));
 
 const APP_ID = Number(process.env.APP_ID); // Convert to number
 const APP_SIGN = process.env.APP_SIGN;
-
-if (!APP_ID || !APP_SIGN) {
+const SECRET_KEY = process.env.SECRET_KEY;
+if (!APP_ID || !APP_SIGN || !SECRET_KEY) {
     console.error("Missing required environment variables.");
     process.exit(1);
 }
@@ -48,6 +48,7 @@ app.get("/generate-token/:userID", (req, res) => {
     const payload = {
         app_id: APP_ID,
         user_id: userID,
+        server_secret:SECRET_KEY,
         nonce: nonce,
         expired_ts: expireTimestamp,
     };
